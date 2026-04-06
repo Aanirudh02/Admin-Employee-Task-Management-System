@@ -2,76 +2,98 @@
 
 ## Project Overview
 
-TaskFlow is a full-stack employee task management system built to handle employee onboarding, approvals, and task assignment in a structured way.
-The goal of this project is to demonstrate real-world backend development concepts like authentication, file handling, and role-based access control.
+TaskFlow is a full-stack Employee Task Management System designed to manage employee onboarding, approval workflows, and task assignment in a structured and scalable manner.
+
+This project demonstrates practical implementation of backend and full-stack development concepts such as authentication, role-based access control, file handling, and cloud-based storage.
 
 ---
 
-## Authentication (JWT Based)
+## Tech Stack
 
-This project uses JWT instead of session-based authentication.
+Frontend: React (Vite)
+Backend: Node.js, Express.js
+Database: MongoDB Atlas (Cloud)
+Authentication: JSON Web Token (JWT)
+File Storage: MongoDB GridFS
+Email Service: Nodemailer (SMTP)
 
-* On login, the server creates a token with user id, role, email, and name
-* The token is stored in localStorage on the frontend
-* Every request sends the token in the Authorization header
-* Token expires in 1 day
+---
+
+## Authentication
+
+The application uses JWT-based authentication instead of session-based authentication.
+
+* A token is generated during login containing user id, role, email, and name
+* The token is stored in localStorage on the client side
+* Each request includes the token in the Authorization header
+* Token expiration is set to 1 day
 * Logout is handled by removing the token from localStorage
 
-This makes the system stateless and scalable.
+This approach ensures a stateless and scalable authentication mechanism.
+
+---
+
+## Session Handling
+
+Session-based authentication is not used in this project.
+JWT-based authentication is implemented to follow modern scalable architecture practices.
 
 ---
 
 ## Employee Registration Flow
 
-* Employee fills the registration form
-
-* Frontend validates required fields and password match
-
-* Aadhaar image upload is required
-
-* Request is sent to:
+* Employee submits the registration form
+* Frontend performs validation including required fields and password confirmation
+* Aadhaar image upload is mandatory
+* Request is sent to the API endpoint:
   POST /api/auth/register
-
-* Files are handled using multer in memory
-
-* Images are uploaded to MongoDB GridFS
-
-* Employee is saved with status "pending"
-
+* File uploads are handled using multer with memory storage
+* Images are stored in MongoDB using GridFS
+* Employee record is created with status set to "pending"
 * Admin approval is required before login
 
 ---
 
 ## File Storage using GridFS
 
-Images are stored using MongoDB GridFS instead of local storage.
+The application uses MongoDB GridFS for storing files instead of local storage.
 
 * Files are split into chunks and stored in:
   uploads.files (metadata)
   uploads.chunks (binary data)
 
 Upload flow:
-File → buffer → GridFS → ObjectId stored in database
+File → Buffer → GridFS → ObjectId stored in database
 
-Access files:
+File access:
 GET /api/files/:id
 
-* Files are streamed directly from database
-* Proper content type is returned
-* Long cache is used for faster loading
+* Files are streamed directly from the database
+* Proper content type is maintained
+* Caching is applied for performance optimization
+
+---
+
+## MongoDB Atlas Integration
+
+MongoDB Atlas is used as a cloud database service.
+
+* Enables remote access and scalability
+* Supports GridFS for file storage
+* Simplifies deployment without local database dependency
 
 ---
 
 ## Admin Functionalities
 
-Employee management:
+Employee Management:
 
 * View all employees
-* Approve or reject employees
+* Approve or reject employee registrations
 * Update salary and holidays
 * Delete employees
 
-Task management:
+Task Management:
 
 * Assign tasks to employees
 * View all tasks
@@ -80,26 +102,26 @@ Task management:
 
 ## Employee Functionalities
 
-Task actions:
+Task Management:
 
 * View assigned tasks
 * Update task status
 
-Profile management:
+Profile Management:
 
-* View profile
-* Update phone, address, and department
+* View profile details
+* Update phone number, address, and department
 
 ---
 
-## Email System
+## Email Notification System
 
 Email notifications are implemented using Nodemailer with SMTP.
 
-Emails are sent when:
+Emails are triggered when:
 
-* Admin approves employee
-* Admin rejects employee
+* Admin approves an employee
+* Admin rejects an employee
 * Admin assigns a task
 * Employee updates task status
 
@@ -107,28 +129,47 @@ Emails are sent when:
 
 ## Middleware and Security
 
-* protect middleware verifies JWT and attaches user to request
-* adminOnly allows only admin access
-* employeeOnly allows only employee access
+* protect middleware verifies JWT and attaches user information to the request
+* adminOnly restricts access to admin users
+* employeeOnly restricts access to employee users
 
-Employees can only access their own tasks using filtering based on their user id.
+Employees can only access their own tasks through filtering based on user id.
+
+---
+
+## Real-Time Updates
+
+The system supports near real-time updates for key actions:
+
+* Employee approval or rejection
+* Task assignment
+* Task status updates
+
+Notifications are delivered via email to ensure timely communication.
+
+---
+
+## Screenshots
+
+Refer to the assets/screenshots folder for application screenshots demonstrating key features and workflows.
 
 ---
 
 ## Key Highlights
 
-* JWT based authentication
-* GridFS file storage
+* JWT-based authentication
 * Role-based access control
-* Email notifications
-* Clean and scalable backend structure
+* MongoDB Atlas cloud integration
+* GridFS file storage
+* Email notification system
+* Modular and scalable backend architecture
 
 ---
 
 ## Conclusion
 
-TaskFlow is a complete backend-focused project that simulates how a company manages employees and tasks.
-I used real time updates whenever admin approves/rejects employee for each task
-assingment employee is mailed.
+TaskFlow is a backend-focused project that simulates real-world employee and task management workflows. It demonstrates the ability to design and develop scalable applications using the MERN stack with modern best practices.
 
-I am looking for opportunities where I can contribute and grow as a backend or full-stack developer.
+This project reflects readiness for a MERN Stack Developer role, with strong understanding of backend systems, API design, authentication, and cloud integration.
+
+---
