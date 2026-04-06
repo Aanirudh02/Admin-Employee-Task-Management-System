@@ -1,0 +1,211 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+/* ── CSS Variables (your color palette) ──────────────────────────────────── */
+:root {
+  --primary:    #1A237E;   /* Deep Navy  */
+  --blue:       #2196F3;   /* Action Blue */
+  --bg:         #F5F7FA;   /* Off-White bg */
+  --white:      #ffffff;
+  --text:       #333333;   /* Dark Grey text */
+  --text-light: #6B7280;
+  --success:    #2E7D32;   /* Forest Green */
+  --warning:    #FFA000;   /* Amber */
+  --danger:     #C62828;
+  --border:     #E5E7EB;
+  --shadow:     0 2px 8px rgba(0,0,0,0.08);
+  --radius:     10px;
+}
+
+/* ── Reset & Base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── Utility classes ──────────────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  border: 1px solid var(--border);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn:hover   { opacity: 0.88; }
+.btn:active  { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary  { background: var(--primary); color: #fff; }
+.btn-blue     { background: var(--blue);    color: #fff; }
+.btn-success  { background: var(--success); color: #fff; }
+.btn-danger   { background: var(--danger);  color: #fff; }
+.btn-outline  { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+.btn-sm       { padding: 6px 12px; font-size: 13px; }
+
+/* ── Form elements ────────────────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 16px;
+}
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--white);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--blue);
+}
+.form-group textarea { resize: vertical; min-height: 80px; }
+
+/* ── Status badges ────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.badge-pending    { background: #FFF3E0; color: #E65100; }
+.badge-approved   { background: #E8F5E9; color: #2E7D32; }
+.badge-rejected   { background: #FFEBEE; color: #C62828; }
+.badge-completed  { background: #E8F5E9; color: #2E7D32; }
+.badge-in-progress{ background: #E3F2FD; color: #1565C0; }
+.badge-on-hold    { background: #FFF3E0; color: #E65100; }
+.badge-cancelled  { background: #FFEBEE; color: #C62828; }
+
+/* priority */
+.badge-critical { background: #FFEBEE; color: #C62828; }
+.badge-major    { background: #FFF3E0; color: #E65100; }
+.badge-medium   { background: #E3F2FD; color: #1565C0; }
+.badge-minor    { background: #F3E5F5; color: #6A1B9A; }
+
+/* ── Alerts ───────────────────────────────────────────────────────────────── */
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.alert-error   { background: #FFEBEE; color: #C62828; border: 1px solid #FFCDD2; }
+.alert-success { background: #E8F5E9; color: #2E7D32; border: 1px solid #C8E6C9; }
+.alert-info    { background: #E3F2FD; color: #1565C0; border: 1px solid #BBDEFB; }
+
+/* ── Table ────────────────────────────────────────────────────────────────── */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th {
+  background: var(--bg);
+  text-align: left;
+  padding: 11px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  border-bottom: 2px solid var(--border);
+}
+td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  vertical-align: middle;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #FAFAFA; }
+
+/* ── Layout helpers ────────────────────────────────────────────────────────── */
+.page-header {
+  margin-bottom: 28px;
+}
+.page-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.page-header p { color: var(--text-light); font-size: 14px; margin-top: 4px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+@media (max-width: 700px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* ── Stat card ─────────────────────────────────────────────────────────────── */
+.stat-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.stat-card .icon {
+  font-size: 28px;
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+}
+.stat-card .num  { font-size: 28px; font-weight: 700; color: var(--primary); line-height:1; }
+.stat-card .lbl  { font-size: 13px; color: var(--text-light); margin-top: 2px; }
+
+/* ── Modal ─────────────────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+.modal {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 28px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; color: var(--primary); }
+.modal-footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
